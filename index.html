@@ -12,104 +12,62 @@
         body {
             background-color: rgb(35, 33, 33);
             font-family: 'Century Gothic', sans-serif;
-            margin: 0;
             color: rgb(224, 226, 226);
-            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        #name {
-            position: absolute;
-            top: 200px;
-            left: 230px;
-            font-size: 75px;
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
         }
 
         .img {
-            position: relative;
-            text-align: left;
+            width: 100%;
+        }
+
+        .overlay {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        #name {
+            font-size: 75px; /* Adjust this value for font size */
+            text-align: center;
+            font-family: Averta-Bold;
+            font-weight: bold;
+            color: rgb(224, 223, 223);
+            position: absolute;
+            top: 184px; /* Adjust this value for the desired vertical position */
+            left: 218px; /* Adjust this value for the desired horizontal position */
         }
 
         #datetime {
-            position: absolute;
-            
-            left: 156px;
             font-weight: 600;
-            font-family: Averta-Bold;
-            font-size: 19px;
+            font-size: 18px; /* Adjust this value for font size */
             color: rgb(212, 213, 213);
-        }
-
-        input {
-            display: block;
-            margin: 10px 0;
-            width: calc(100% - 20px);
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        button {
-            width: calc(100% - 20px);
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        @media (max-width: 768px) {
-            #name {
-
-
-
-                top: 198px;
-                left: 52%;
-                transform: translateX(-50%);
-                font-size: 76px;
-            }
-            #datetime {
-
-
-
-
-
-
-
-                left: 49.3%;
-                top: 528px;
-                transform: translateX(-50%);
-                font-size: 18px;
-                text-align: center;
-            }
-
-            .img img {
-                width: 100%;
-                height: auto;
-            }
-        }
-
-        @media (max-width: 480px) {
-            #name {
-                font-size: 50px;
-            }
-
-            #datetime {
-                top: 37.7px;
-                font-size: 13px;
-            }
-
-            input, button {
-                width: calc(100% - 20px);
-            }
+            text-align: center;
+            position: absolute;
+            font-family: Averta-Bold;
+            top: 515px; /* Adjust this value for the desired vertical position */
+            left: 153.5px; /* Adjust this value for the desired horizontal position */
         }
     </style>
 </head>
 
 <body onload="displayDateTime()">
-    <div class="img">
-        <img src="./REAL.png" alt="label" width="500">
+    <div class="container">
+        <img src="./REAL.png" alt="label" class="img">
+        <div class="overlay">
+            <h2 id="name">40</h2>
+            <h1 id="datetime"></h1>
+        </div>
     </div>
-    <br>
-    <h2 id="name">40</h2>
-    <h1 id="datetime"></h1>
     <input type="number" id="name1" placeholder="Amount" value="40" oninput="name123()">
     <button id="playButton">PAY</button>
     <audio id="audioElement" src="/gpay.mp3"></audio>
@@ -125,23 +83,22 @@
         // Function to get and display current date and time
         function displayDateTime() {
             const dateTimeElement = document.getElementById('datetime');
-            
+
             // Options for date formatting
             const dateOptions = { day: '2-digit', month: 'long', year: 'numeric' };
             const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
-        
+
             const now = new Date();
-            
+
             // Format the date
             const formattedDate = now.toLocaleDateString('en-GB', dateOptions);
-            
+
             // Format the time
             const formattedTime = now.toLocaleTimeString('en-GB', timeOptions).toLowerCase();
-            
+
             // Combine date and time
             dateTimeElement.textContent = `${formattedDate} ${formattedTime}`;
         }
-        
 
         // Function to play audio on button click
         function playAudio() {
