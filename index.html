@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Page</title>
+    <link href="https://db.onlinewebfonts.com/c/c36a75c5ada59665e225bbf5e38efd34?family=Averta-Bold" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Century+Gothic">
+    <style>
+        body {
+            background-color: rgb(35, 33, 33);
+            font-family: 'Century Gothic', sans-serif;
+            margin: 0;
+            color: rgb(224, 226, 226);
+            padding: 0;
+        }
+
+        #name {
+            position: absolute;
+            top: 200px;
+            left: 230px;
+            font-size: 75px;
+        }
+
+        .img {
+            position: relative;
+            text-align: left;
+        }
+
+        #datetime {
+            position: absolute;
+            top: 523.5px;
+            left: 156px;
+            font-weight: 600;
+            font-family: Averta-Bold;
+            font-size: 18px;
+            color: rgb(212, 213, 213);
+        }
+
+        input {
+            display: block;
+            margin: 10px 0;
+            width: calc(100% - 20px);
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        button {
+            width: calc(100% - 20px);
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 768px) {
+            #name {
+                top: 150px;
+                left: 52%;
+                transform: translateX(-50%);
+                font-size: 50px;
+            }
+
+            #datetime {
+              
+                left: 49.3%;
+                transform: translateX(-50%);
+                font-size: 16px;
+                text-align: center;
+            }
+
+            .img img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #name {
+                top: 143.7px;
+                font-size: 50px;
+            }
+
+            #datetime {
+                top: 370.7px;
+                font-size: 13px;
+            }
+
+            input, button {
+                width: calc(100% - 20px);
+            }
+        }
+    </style>
+</head>
+
+<body onload="displayDateTime()">
+    <div class="img">
+        <img src="./REAL.png" alt="label" width="500">
+    </div>
+    <br>
+    <h2 id="name">40</h2>
+    <h1 id="datetime"></h1>
+    <input type="number" id="name1" placeholder="Amount" value="40" oninput="name123()">
+    <button id="playButton">PAY</button>
+    <audio id="audioElement" src="/gpay.mp3"></audio>
+
+    <script>
+        // Function to update amount based on input
+        function name123() {
+            const input = document.getElementById("name1");
+            const result = document.getElementById("name");
+            result.textContent = input.value;
+        }
+
+        // Function to get and display current date and time
+        function displayDateTime() {
+            const dateTimeElement = document.getElementById('datetime');
+            
+            // Options for date formatting
+            const dateOptions = { day: '2-digit', month: 'long', year: 'numeric' };
+            const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
+        
+            const now = new Date();
+            
+            // Format the date
+            const formattedDate = now.toLocaleDateString('en-GB', dateOptions);
+            
+            // Format the time
+            const formattedTime = now.toLocaleTimeString('en-GB', timeOptions).toLowerCase();
+            
+            // Combine date and time
+            dateTimeElement.textContent = `${formattedDate} ${formattedTime}`;
+        }
+        
+
+        // Function to play audio on button click
+        function playAudio() {
+            const audioElement = document.getElementById("audioElement");
+            audioElement.play();
+            const inputBox = document.getElementById("name1");
+            const button = document.getElementById("playButton");
+            inputBox.remove();
+            button.remove();
+        }
+
+        document.getElementById("playButton").addEventListener("click", playAudio);
+    </script>
+</body>
+
+</html>
