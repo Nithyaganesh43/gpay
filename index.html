@@ -34,20 +34,19 @@
 
         #name {
             position: absolute;
-            top: 35%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 36px; /* Adjusted for better fit */
+            top: 190px;
+            left: 43.7%;
+            font-size: 73px; /* Adjusted for better fit */
             font-family: 'Century Gothic', sans-serif;
             white-space: nowrap;
         }
 
         #datetime {
             position: absolute;
-            top: 80%;
+            top: 520px;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 20px; /* Adjusted for better fit */
+            font-size: 18.2px; /* Adjusted for better fit */
             font-family: "Open Sans", sans-serif;
             font-weight: 700;
             white-space: nowrap;
@@ -104,22 +103,28 @@
         // Function to get and display current date and time
         function displayDateTime() {
             const dateTimeElement = document.getElementById('datetime');
-
-            // Options for date formatting
+            
+            const now = new Date();
             const options = {
                 day: '2-digit',
-                month: 'long',
+                month: 'short',
                 year: 'numeric',
                 hour: 'numeric',
                 minute: 'numeric',
                 hour12: true
             };
 
-            const now = new Date();
-            const formattedDateTime = now.toLocaleString('en-GB', options).toLowerCase();
-            dateTimeElement.textContent = formattedDateTime;
-        }
+            const formattedDate = now.toLocaleString('en-GB', options).replace(/,/g, '');
+            const dateParts = formattedDate.split(' ');
+            const day = dateParts[0];
+            const month = dateParts[1].charAt(0).toUpperCase() + dateParts[1].slice(1);
+            const year = dateParts[2];
+            const time = dateParts[3];
+            const ampm = dateParts[4];
 
+            const finalDateTime = `${day} ${month} ${year} ${time} ${ampm}`;
+            dateTimeElement.textContent = finalDateTime;
+        }
         // Function to play audio on button click
         function playAudio() {
             const audioElement = document.getElementById("audioElement");
