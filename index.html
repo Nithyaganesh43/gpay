@@ -11,37 +11,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Century+Gothic">
     <style>
-        body , html {
-            
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
             background-color: rgb(35, 33, 33);
             color: rgb(223, 223, 223);
+            overflow-x: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 1080px; /* Fixed width based on the image dimensions */
+            margin: 0 auto;
+        }
+
+        .img {
+            width: 100%;
+            height: auto;
         }
 
         #name {
             position: absolute;
-            top: 410px;
-            left: 478px;
-            font-size: 169px;
+            top: 408px;
+            left: 43.5%;
+            font-size: 165px;
             font-family: 'Century Gothic', sans-serif;
-        }
-
-        .img {
-            position: relative;
-            text-align: left;
+            white-space: nowrap;
         }
 
         #datetime {
             position: absolute;
             top: 1120px;
-            left: 330px;
+            left: 50%;
+            transform: translateX(-50%);
             font-size: 41px;
             font-family: "Open Sans", sans-serif;
-            font-optical-sizing: auto;
             font-weight: 700;
-            font-style: normal;
+            white-space: nowrap;
         }
 
-        input {
+        input, button {
             display: inline-block;
             margin: 20px auto;
             padding: 10px 20px;
@@ -61,21 +72,6 @@
             border-color: rgb(100, 100, 255);
         }
 
-        button {
-            display: inline-block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            font-size: 20px;
-            font-family: "Open Sans", sans-serif;
-            border: 2px solid rgb(223, 223, 223);
-            border-radius: 5px;
-            background-color: rgb(100, 100, 255);
-            color: rgb(223, 223, 223);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            cursor: pointer;
-            width: 200px;
-        }
-
         button:hover {
             background-color: rgb(80, 80, 255);
         }
@@ -83,17 +79,18 @@
         button:active {
             background-color: rgb(60, 60, 255);
         }
-        
     </style>
 </head>
 
 <body>
-    <img src="./REAL.png" alt="label" class="img">
-    <h2 id="name">40</h2>
-    <h1 id="datetime"></h1><br>
+    <div class="container">
+        <img src="./REAL.png" alt="label" class="img">
+        <h2 id="name">30</h2>
+        <h1 id="datetime"></h1>
+    </div>
     <input type="number" id="name1" placeholder="Amount" value="40" oninput="name123()">
     <button id="playButton">PAY</button>
-    <audio id="audioElement" src="/gpay.mp3"></audio> 
+    <audio id="audioElement" src="/gpay.mp3"></audio>
 
     <script>
         // Function to update amount based on input
@@ -108,13 +105,18 @@
             const dateTimeElement = document.getElementById('datetime');
 
             // Options for date formatting
-            const dateOptions = { day: '2-digit', month: 'long', year: 'numeric' };
-            const timeOptions = { hour: 'numeric', minute: 'numeric', hour12: true };
+            const options = {
+                day: '2-digit',
+                month: 'long',
+                year: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+            };
 
             const now = new Date();
-            const formattedDate = now.toLocaleDateString('en-GB', dateOptions);
-            const formattedTime = now.toLocaleTimeString('en-GB', timeOptions).toLowerCase();
-            dateTimeElement.textContent = `${formattedDate} ${formattedTime}`;
+            const formattedDateTime = now.toLocaleString('en-GB', options).toLowerCase();
+            dateTimeElement.textContent = formattedDateTime;
         }
 
         // Function to play audio on button click
