@@ -23,7 +23,7 @@
 
         .container {
             position: relative;
-            width: 1080px; /* Fixed width based on the image dimensions */
+            max-width: 493px; /* Max width based on your phone's width */
             margin: 0 auto;
         }
 
@@ -34,19 +34,20 @@
 
         #name {
             position: absolute;
-            top: 408px;
-            left: 43.5%;
-            font-size: 165px;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 36px; /* Adjusted for better fit */
             font-family: 'Century Gothic', sans-serif;
             white-space: nowrap;
         }
 
         #datetime {
             position: absolute;
-            top: 1120px;
+            top: 80%;
             left: 50%;
-            transform: translateX(-50%);
-            font-size: 41px;
+            transform: translate(-50%, -50%);
+            font-size: 20px; /* Adjusted for better fit */
             font-family: "Open Sans", sans-serif;
             font-weight: 700;
             white-space: nowrap;
